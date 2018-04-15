@@ -1,0 +1,12 @@
+<template>
+  <h1>Login</h1>
+</template>
+
+<script>
+export default {
+  name: 'auth-login'
+}
+</script>
+
+<style>
+</style>
