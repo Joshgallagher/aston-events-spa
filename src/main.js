@@ -3,8 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Buefy from 'buefy'
 
 import './assets/sass/main.sass'
+
+Vue.use(Buefy)
 
 Vue.config.productionTip = false
 
