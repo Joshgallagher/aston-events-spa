@@ -15,7 +15,7 @@
           <b-input type="tel" maxlength="11"></b-input>
         </b-field>
         <b-field label="Password">
-          <b-input type="password"></b-input>
+          <b-input type="password" password-reveal></b-input>
         </b-field>
         <a class="button is-primary is-medium is-fullwidth">Create Account</a>
         <p class="has-account has-text-centered">Have an account? <a href="#" class="has-text-link">Login</a></p>
