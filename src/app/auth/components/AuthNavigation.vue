@@ -16,7 +16,7 @@
           <div class="navbar-item" v-if="showLoginBtn">
             <router-link :to="{ name: 'auth-login' }"
               class="button is-link"
-              >Login
+              >Log in
             </router-link>
           </div>
           <div class="navbar-item" v-else>
