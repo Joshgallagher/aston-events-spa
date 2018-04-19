@@ -3,11 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import Buefy from 'buefy'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import './assets/sass/main.sass'
 
 Vue.use(Buefy)
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
@@ -15,6 +19,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
