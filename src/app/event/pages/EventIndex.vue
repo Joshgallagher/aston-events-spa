@@ -7,6 +7,20 @@
             <b-notification type="is-warning" v-if="user" v-show="!confirmed">
               Hey <strong>{{ user.name }}</strong>! You still need to confirm your email address before you can organise events on AstonEvents!
             </b-notification>
+            <div class="columns">
+              <div class="column is-half">
+                <event-item></event-item>
+                <event-item></event-item>
+                <event-item></event-item>
+                <event-item></event-item>
+              </div>
+              <div class="column is-half">
+                <event-item></event-item>
+                <event-item></event-item>
+                <event-item></event-item>
+                <event-item></event-item>
+              </div>
+            </div>
           </div>
         </div>
       </div>
