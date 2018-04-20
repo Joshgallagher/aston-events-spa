@@ -15,6 +15,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "buefy": "^0.6.5",
+    "localforage": "^1.7.1",
+    "lodash": "^4.17.5",
     "node-sass": "^4.8.3",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.2",

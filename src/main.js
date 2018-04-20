@@ -7,11 +7,16 @@ import store from './store'
 import Buefy from 'buefy'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import localforage from 'localforage'
 
 import './assets/sass/main.sass'
 
 Vue.use(Buefy)
 Vue.use(VueAxios, axios)
+
+localforage.config({
+  driver: localforage.LOCALSTORAGE
+})
 
 Vue.config.productionTip = false
 

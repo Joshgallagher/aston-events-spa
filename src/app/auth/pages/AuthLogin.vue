@@ -4,17 +4,25 @@
     <div class="section">
       <div class="container is-fluid">
         <div class="columns">
-          <div class="column is-one-third is-offset-one-third">
+          <form class="column is-one-third is-offset-one-third"
+            @submit.prevent="submit">
             <h1 class="title">Welcome Back.</h1>
-            <b-field label="Email Address">
-              <b-input type="email"></b-input>
+            <b-notification type="is-danger" v-if="errors.message">
+              Whooops! We could not sign you in with those details.
+            </b-notification>
+            <b-field label="Email Address"
+              :type=emailHasErrors
+              :message=errors.email>
+              <b-input v-model="email" type="email"></b-input>
             </b-field>
-            <b-field label="Password">
-              <b-input type="password" password-reveal></b-input>
+            <b-field label="Password"
+              :type=passwordHasErrors
+              :message=errors.password>
+              <b-input v-model="password" type="password" password-reveal></b-input>
             </b-field>
-            <a class="button is-primary is-medium is-fullwidth">Log in</a>
+            <button type="submit" class="button is-primary is-medium is-fullwidth">Log in</button>
             <p class="has-account has-text-centered">Need an account? <router-link :to="{ name: 'auth-signup' }" class="has-text-link">Sign up</router-link></p>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -22,6 +30,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import authNavigation from '../components/AuthNavigation'
 
 export default {
@@ -29,6 +39,39 @@ export default {
 
   components: {
     authNavigation
+  },
+
+  data () {
+    return {
+      email: null,
+      password: null,
+      errors: []
+    }
+  },
+
+  computed: {
+    emailHasErrors () {
+      if (this.errors.email) return 'is-danger'
+    },
+    passwordHasErrors () {
+      if (this.errors.password) return 'is-danger'
+    }
+  },
+
+  methods: {
+    ...mapActions({
+      login: 'auth/login'
+    }),
+
+    submit () {
+      this.login({
+        payload: {
+          email: this.email,
+          password: this.password
+        },
+        context: this
+      })
+    }
   }
 }
 </script>
