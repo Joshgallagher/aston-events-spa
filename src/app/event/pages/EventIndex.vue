@@ -4,6 +4,9 @@
       <div class="container is-fluid">
         <div class="columns">
           <div class="column is-6">
+          <b-notification type="is-warning" v-if=user v-show=!confirmed>
+            Hey <strong>{{ user.name }}</strong>! You still need to confirm your email address before you can organise events on AstonEvents!
+          </b-notification>
 
             <div class="box">
               <div class="columns">
@@ -50,8 +53,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'event-index'
+  name: 'event-index',
+
+  computed: {
+    ...mapGetters({
+      confirmed: 'auth/confirmed',
+      user: 'auth/user'
+    })
+  }
 }
 </script>
 
