@@ -39,6 +39,10 @@ export const login = ({ dispatch }, { payload, context }) => {
     })
 }
 
+export const confirmEmail = ({ dispatch }, token) => {
+  return Vue.axios.post('http://aston-events-api.test/api/v1/register/confirm', token)
+}
+
 export const fetchUser = ({ commit }) => {
   return Vue.axios.get('http://aston-events-api.test/api/v1/user')
     .then(res => {
