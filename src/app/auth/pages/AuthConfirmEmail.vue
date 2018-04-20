@@ -9,11 +9,15 @@ export default {
   name: 'auth-confirm-email',
 
   mounted () {
-    let token =  this.$route.query.token
+    let token = this.$route.query.token
 
-    this.confirm(token)
-      .then(() => console.log('good'))
-      .catch(() => console.log('bad'))
+    this.confirm({ token })
+      .then(() => {
+        this.$router.replace({ name: 'auth-login' })
+      })
+      .catch(() => {
+        this.$router.replace({ name: 'auth-login' })
+      })
   },
 
   methods: {
