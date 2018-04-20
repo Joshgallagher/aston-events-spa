@@ -23,6 +23,15 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  created () {
+    store.dispatch('auth/setToken')
+      .then(() => {
+        store.dispatch('auth/fetchUser')
+          .catch(() => {
+            router.replace({ name: 'login' })
+          })
+      })
+  },
   router,
   store,
   components: { App },

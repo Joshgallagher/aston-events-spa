@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import { setHttpToken } from '../helpers'
+import { isEmpty } from 'lodash'
+import localforage from 'localforage'
 
 export const signup = ({ dispatch }, { payload, context }) => {
   return Vue.axios.post('http://aston-events-api.test/api/v1/register', payload)
@@ -41,6 +43,22 @@ export const fetchUser = ({ commit }) => {
 }
 
 export const setToken = ({ dispatch, commit }, token) => {
+  if (isEmpty(token)) {
+    return dispatch('checkTokenExists')
+      .then(token => setHttpToken(token))
+  }
+
   commit('setToken', token)
   setHttpToken(token)
+}
+
+export const checkTokenExists = ({ dispatch }) => {
+  return localforage.getItem('access_token')
+    .then(token => {
+      if (isEmpty(token)) {
+        return Promise.reject(new Error('TOKEN_DOES_NOT_EXIST'))
+      }
+
+      return Promise.resolve(token)
+    })
 }
