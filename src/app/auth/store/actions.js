@@ -3,7 +3,14 @@ import { setHttpToken } from '../helpers'
 
 export const signup = ({ dispatch }, { payload, context }) => {
   return Vue.axios.post('http://aston-events-api.test/api/v1/register', payload)
-    .then((res) => console.log(res))
+    .then((res) => {
+      let token = res.data.meta.access_token
+
+      dispatch('setToken', token)
+        .then(() => {
+          dispatch('fetchUser')
+        })
+    })
     .catch((err) => {
       context.errors = err.response.data.errors
     })
