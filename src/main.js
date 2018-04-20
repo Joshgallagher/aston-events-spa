@@ -28,7 +28,8 @@ new Vue({
       .then(() => {
         store.dispatch('auth/fetchUser')
           .catch(() => {
-            router.replace({ name: 'login' })
+            store.dispatch('auth/clearAuth')
+              .then(() => router.replace({ name: 'auth-login' }))
           })
       })
   },
