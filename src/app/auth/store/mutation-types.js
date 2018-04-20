@@ -1,0 +1,4 @@
+export const SET_TOKEN = 'SET_TOKEN'
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
+export const SET_CONFIRMED = 'SET_CONFIRMED'
+export const SET_USER = 'SET_USER'

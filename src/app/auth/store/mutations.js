@@ -1,23 +1,26 @@
+import * as mutationTypes from './mutation-types'
 import localforage from 'localforage'
 import { isEmpty } from 'lodash'
 
-export const setToken = (state, token) => {
-  if (isEmpty(token)) {
-    localforage.removeItem('access_token', token)
-    return
+export default {
+  [mutationTypes.SET_TOKEN] (state, token) {
+    if (isEmpty(token)) {
+      localforage.removeItem('access_token', token)
+      return
+    }
+
+    localforage.setItem('access_token', token)
+  },
+
+  [mutationTypes.SET_AUTHENTICATED] (state, authenticated) {
+    state.user.authenticated = authenticated
+  },
+
+  [mutationTypes.SET_CONFIRMED] (state, confirmed) {
+    state.user.confirmed = confirmed
+  },
+
+  [mutationTypes.SET_USER] (state, user) {
+    state.user.user = user
   }
-
-  localforage.setItem('access_token', token)
-}
-
-export const setAuthenticated = (state, authenticated) => {
-  state.user.authenticated = authenticated
-}
-
-export const setConfirmed = (state, confirmed) => {
-  state.user.confirmed = confirmed
-}
-
-export const setUser = (state, user) => {
-  state.user.user = user
 }
