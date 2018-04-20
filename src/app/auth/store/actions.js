@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import router from '@/router'
 import { setHttpToken } from '../helpers'
 import { isEmpty } from 'lodash'
 import localforage from 'localforage'
@@ -12,6 +13,8 @@ export const signup = ({ dispatch }, { payload, context }) => {
         .then(() => {
           dispatch('fetchUser')
         })
+
+      router.replace({ name: 'event-index' })
     })
     .catch((err) => {
       context.errors = err.response.data.errors
@@ -27,6 +30,8 @@ export const login = ({ dispatch }, { payload, context }) => {
         .then(() => {
           dispatch('fetchUser')
         })
+
+      router.replace({ name: 'event-index' })
     })
     .catch((err) => {
       context.errors = err.response.data.errors
