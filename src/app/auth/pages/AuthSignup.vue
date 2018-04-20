@@ -62,12 +62,15 @@ export default {
     nameHasErrors () {
       if (this.errors.name) return 'is-danger'
     },
+
     emailHasErrors () {
       if (this.errors.email) return 'is-danger'
     },
+
     contactNumberHasErrors () {
       if (this.errors.contact_number) return 'is-danger'
     },
+
     passwordHasErrors () {
       if (this.errors.password) return 'is-danger'
     }

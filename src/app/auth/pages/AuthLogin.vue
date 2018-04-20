@@ -7,7 +7,8 @@
           <form class="column is-one-third is-offset-one-third"
             @submit.prevent="submit">
             <h1 class="title">Welcome Back.</h1>
-            <b-notification type="is-danger" v-if="errors.message">
+            <b-notification type="is-danger"
+              :active="errorNotification">
               Whooops! We could not sign you in with those details.
             </b-notification>
             <b-field label="Email Address"
@@ -31,6 +32,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { isEmpty } from 'lodash'
 
 import authNavigation from '../components/AuthNavigation'
 
@@ -53,8 +55,13 @@ export default {
     emailHasErrors () {
       if (this.errors.email) return 'is-danger'
     },
+
     passwordHasErrors () {
       if (this.errors.password) return 'is-danger'
+    },
+
+    errorNotification () {
+      return !isEmpty(this.errors.message)
     }
   },
 
@@ -64,12 +71,16 @@ export default {
     }),
 
     submit () {
+      this.errors = []
+
       this.login({
         payload: {
           email: this.email,
           password: this.password
         },
         context: this
+      }).then(() => {
+        this.$router.replace({ name: 'event-index' })
       })
     }
   }
