@@ -1,0 +1,3 @@
+export const SET_EVENTS_DATA = 'SET_EVENTS_DATA'
+export const SET_EVENTS_LINKS = 'SET_EVENTS_LINKS'
+export const SET_EVENTS_META = 'SET_EVENTS_META'

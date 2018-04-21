@@ -1,11 +1,13 @@
-export const setEventsData = (state, events) => {
-  state.events.data = events
-}
+import * as mutationTypes from './mutationTypes'
 
-export const setEventsLinks = (state, links) => {
-  state.events.links = links
-}
-
-export const setEventsMeta = (state, meta) => {
-  state.events.meta = meta
+export default {
+  [mutationTypes.SET_EVENTS_DATA] (state, events) {
+    state.events.data = events
+  },
+  [mutationTypes.SET_EVENTS_LINKS] (state, links) {
+    state.events.links = links
+  },
+  [mutationTypes.SET_EVENTS_META] (state, meta) {
+    state.events.meta = meta
+  }
 }
