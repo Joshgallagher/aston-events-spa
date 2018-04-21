@@ -1,13 +1,13 @@
 <template>
   <div class="box">
     <div class="columns">
-      <div class="column is-11">
+      <div class="column is-10">
         <a href="#" class="title is-5">
           <span class="is-7 has-text-primary has-text-weight-normal">Joshua Gallagher organised</span>
           Aston Tigers (American Football)
         </a>
       </div>
-      <div class="column is-1 has-text-right">
+      <div class="column is-2 has-text-right">
         <b-icon
           pack="mdi"
           icon="heart"
@@ -19,6 +19,13 @@
     </div>
     <div class="columns">
       <div class="date-column column">
+        <b-icon
+          pack="mdi"
+          icon="map-marker-outline"
+          size="is-small">
+        </b-icon>
+        <span>Aston Students' Union</span>
+        &middot;
         <b-icon
           pack="mdi"
           icon="clock"
