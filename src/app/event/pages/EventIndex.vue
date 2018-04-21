@@ -17,12 +17,11 @@
               :location="event.location"
               :date="event.date"
               :time="event.time"
-              :description="event.description"
-              >
-              </event-item>
+              :description="event.description" />
           </div>
           <div class="column is-2">
-            <global-menu></global-menu>
+            <event-filter-menu />
+            <event-category-menu />
           </div>
         </div>
       </div>
@@ -33,17 +32,19 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
-import globalMenu from '../../global/components/GlobalMenu'
 import eventItem from '../components/EventItem'
-import eventNavigation from '../components/eventNavigation'
+import eventNavigation from '../components/EventNavigation'
+import eventFilterMenu from '../components/EventFilterMenu'
+import eventCategoryMenu from '../components/EventCategoryMenu'
 
 export default {
   name: 'event-index',
 
   components: {
-    globalMenu,
     eventItem,
-    eventNavigation
+    eventNavigation,
+    eventFilterMenu,
+    eventCategoryMenu
   },
 
   mounted () {
