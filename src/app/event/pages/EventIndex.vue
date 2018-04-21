@@ -1,5 +1,21 @@
 <template>
   <div>
+    <div class="navbar is-primary">
+      <div class="navbar-container container is-flex">
+        <div class="navbar-start">
+          <div class="navbar-brand">
+            <router-link :to="{ name: 'event-index' }"
+              class="navbar-item has-text-weight-bold"
+              >Aston<span class="has-text-weight-normal">Events</span>
+            </router-link>
+          </div>
+        </div>
+        <div class="navbar-end-container navbar-end is-flex">
+          <a class="navbar-item">Log Out</a>
+        </div>
+      </div>
+    </div>
+
     <div class="section">
       <div class="container is-fluid">
         <div class="columns">
