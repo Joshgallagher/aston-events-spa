@@ -7,6 +7,7 @@ import * as getters from './getters'
 import mutations from './mutations'
 
 import auth from '@/app/auth/store'
+import event from '@/app/event/store'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ const store = new Vuex.Store({
   getters,
   mutations,
   modules: {
-    auth
+    auth,
+    event
   }
 })
 
