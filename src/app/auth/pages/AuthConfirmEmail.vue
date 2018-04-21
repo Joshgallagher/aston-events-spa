@@ -1,5 +1,10 @@
 <template>
-  <div></div>
+  <div>
+    <b-loading :is-full-page="true"
+      :active="true"
+      :canCancel="false">
+    </b-loading>
+  </div>
 </template>
 
 <script>

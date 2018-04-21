@@ -80,3 +80,8 @@ export const clearAuth = ({ commit, dispatch }) => {
   commit(mutationTypes.SET_TOKEN, null)
   setHttpToken(null)
 }
+
+export const logout = ({ dispatch }) => {
+  return Vue.axios.post('http://aston-events-api.test/api/v1/auth/token/revoke')
+    .then(() => dispatch('clearAuth'))
+}
