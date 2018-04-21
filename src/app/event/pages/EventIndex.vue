@@ -12,6 +12,7 @@
               :name="event.name"
               :organiserName="event.organiser.name"
               :favoritesCount="event.favorites_count"
+              :favorited="event.favorited"
               :location="event.location"
               :date="event.date"
               :time="event.time"

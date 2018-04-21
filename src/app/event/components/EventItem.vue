@@ -10,7 +10,7 @@
       <div class="column is-2 has-text-right">
         <b-icon
           pack="mdi"
-          icon="heart"
+          :icon="isFavorited"
           size="is-small"
           type="is-danger">
         </b-icon>
@@ -57,6 +57,10 @@ export default {
       type: Number,
       default: 0
     },
+    'favorited': {
+      type: Boolean,
+      default: false
+    },
     'location': {
       type: String
     },
@@ -68,6 +72,12 @@ export default {
     },
     'description': {
       type: String
+    }
+  },
+
+  computed: {
+    isFavorited () {
+      return this.favorited ? 'heart' : 'heart-outline'
     }
   }
 }
