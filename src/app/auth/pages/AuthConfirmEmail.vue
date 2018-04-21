@@ -9,12 +9,17 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { isEmpty } from 'lodash'
 
 export default {
   name: 'auth-confirm-email',
 
   mounted () {
     let token = this.$route.query.token
+
+    if (isEmpty(token)) {
+      return this.$router.replace({ name: 'event-index' })
+    }
 
     this.confirm({ token })
       .then(() => {
