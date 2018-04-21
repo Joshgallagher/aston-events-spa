@@ -21,6 +21,6 @@ export default {
   },
 
   [mutationTypes.SET_USER] (state, user) {
-    state.user.user = user
+    state.user.data = user
   }
 }
