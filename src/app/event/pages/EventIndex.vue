@@ -7,17 +7,17 @@
             <b-notification type="is-warning" v-if="user" v-show="!confirmed">
               Hey <strong>{{ user.name }}</strong>! You still need to confirm your email address before you can organise events on AstonEvents!
             </b-notification>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
-            <event-item></event-item>
+            <event-item v-for="event in eventsData"
+              :key="event.id"
+              :name="event.name"
+              :organiserName="event.organiser.name"
+              :favoritesCount="event.favorites_count"
+              :location="event.location"
+              :date="event.date"
+              :time="event.time"
+              :description="event.description"
+              >
+              </event-item>
           </div>
           <div class="column is-2">
             <global-menu></global-menu>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import globalMenu from '../../global/components/GlobalMenu'
 import eventItem from '../components/EventItem'
@@ -42,10 +42,21 @@ export default {
     eventItem
   },
 
+  mounted () {
+    this.getEvents()
+  },
+
   computed: {
     ...mapGetters({
+      eventsData: 'event/eventsData',
       confirmed: 'auth/confirmed',
       user: 'auth/user'
+    })
+  },
+
+  methods: {
+    ...mapActions({
+      getEvents: 'event/getEvents'
     })
   }
 }

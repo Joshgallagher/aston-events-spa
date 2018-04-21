@@ -3,8 +3,8 @@
     <div class="columns">
       <div class="column is-10">
         <a href="#" class="title is-5">
-          <span class="is-7 has-text-primary has-text-weight-normal">Joshua Gallagher organised</span>
-          Aston Tigers (American Football)
+          <span class="is-7 has-text-primary has-text-weight-normal">{{ organiserName }} organised</span>
+          {{ name }}
         </a>
       </div>
       <div class="column is-2 has-text-right">
@@ -14,7 +14,7 @@
           size="is-small"
           type="is-danger">
         </b-icon>
-        10
+        {{ favoriteCount }}
       </div>
     </div>
     <div class="columns">
@@ -24,21 +24,19 @@
           icon="map-marker-outline"
           size="is-small">
         </b-icon>
-        <span>Aston Students' Union</span>
+        <span v-text="location"></span>
         &middot;
         <b-icon
           pack="mdi"
           icon="clock"
           size="is-small">
         </b-icon>
-        <span>12th June 2018 @ 1:00PM</span>
+        <span>{{ date }} @ {{ time }}</span>
       </div>
     </div>
     <div class="columns">
       <div class="column">
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut ipsum deserunt, quia consectetur? Maxime accusantium neque dignissimos, assumenda tenetur delectus reiciendis voluptate eaque quos repellat nisi necessitatibus odio, officia aliquam.
-        </div>
+        <div class="content" v-text="description"></div>
       </div>
     </div>
   </div>
@@ -46,7 +44,32 @@
 
 <script>
 export default {
-  name: 'event-item'
+  name: 'event-item',
+
+  props: {
+    'name': {
+      type: String
+    },
+    'organiserName': {
+      type: String
+    },
+    'favoriteCount': {
+      type: Number,
+      default: 0
+    },
+    'location': {
+      type: String
+    },
+    'date': {
+      type: String
+    },
+    'time': {
+      type: String
+    },
+    'description': {
+      type: String
+    }
+  }
 }
 </script>
 
