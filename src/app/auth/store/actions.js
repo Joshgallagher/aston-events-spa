@@ -3,7 +3,7 @@ import router from '@/router'
 import { setHttpToken } from '../helpers'
 import { isEmpty } from 'lodash'
 import localforage from 'localforage'
-import * as mutationTypes from './mutation-types'
+import * as mutationTypes from './mutationTypes'
 
 export const signup = ({ dispatch }, { payload, context }) => {
   return Vue.axios.post('http://aston-events-api.test/api/v1/register', payload)

@@ -1,4 +1,4 @@
-import * as mutationTypes from './mutation-types'
+import * as mutationTypes from './mutationTypes'
 import localforage from 'localforage'
 import { isEmpty } from 'lodash'
 
