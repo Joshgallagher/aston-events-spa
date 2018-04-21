@@ -4,6 +4,10 @@ export default [
   {
     name: 'auth-login',
     path: '/login',
-    component: AuthLogin
+    component: AuthLogin,
+    meta: {
+      guest: true,
+      authenticated: false
+    }
   }
 ]

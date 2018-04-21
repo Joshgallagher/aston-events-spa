@@ -4,6 +4,10 @@ export default [
   {
     name: 'auth-confirm-email',
     path: '/confirm',
-    component: AuthConfirmEmail
+    component: AuthConfirmEmail,
+    meta: {
+      guest: false,
+      authenticated: false
+    }
   }
 ]

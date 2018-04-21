@@ -4,6 +4,10 @@ export default [
   {
     name: 'auth-signup',
     path: '/signup',
-    component: AuthSignup
+    component: AuthSignup,
+    meta: {
+      guest: true,
+      authenticated: false
+    }
   }
 ]
