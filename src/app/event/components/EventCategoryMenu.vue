@@ -4,7 +4,9 @@
       Or Pick a Category
     </p>
     <ul class="menu-list">
-      <li>
+      <li v-for="category in categories"
+        :key="category.id"
+      >
         <a>
           <b-icon
             pack="mdi"
@@ -12,29 +14,7 @@
             size="is-small"
             type="is-primary">
           </b-icon>
-          Sport
-        </a>
-      </li>
-      <li>
-        <a>
-          <b-icon
-            pack="mdi"
-            icon="tag"
-            size="is-small"
-            type="is-primary">
-          </b-icon>
-          Culture
-        </a>
-      </li>
-      <li>
-        <a>
-          <b-icon
-            pack="mdi"
-            icon="tag"
-            size="is-small"
-            type="is-primary">
-          </b-icon>
-          Other
+          {{ category.name }}
         </a>
       </li>
     </ul>
@@ -42,14 +22,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'global-menu',
 
+  mounted () {
+    this.getCategories()
+  },
+
   computed: {
     ...mapGetters({
+      categories: 'categories',
       authenticated: 'auth/authenticated'
+    })
+  },
+
+  methods: {
+    ...mapActions({
+      getCategories: 'getCategories'
     })
   }
 }

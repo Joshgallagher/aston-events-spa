@@ -67,7 +67,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { isEmpty, omit } from 'lodash'
+import { omit } from 'lodash'
 
 export default {
   name: 'global-menu',
