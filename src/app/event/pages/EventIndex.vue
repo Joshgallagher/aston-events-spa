@@ -8,17 +8,22 @@
             <b-notification type="is-warning" v-if="user" v-show="!confirmed">
               Hey <strong>{{ user.name }}</strong>! You still need to confirm your email address before you can organise events on AstonEvents!
             </b-notification>
-            <event-item v-for="event in eventsData"
-              :key="event.id"
-              :name="event.name"
-              :organiserName="event.organiser.name"
-              :favoritesCount="event.favorites_count"
-              :favorited="event.favorited"
-              :location="event.location"
-              :date="event.date"
-              :time="event.time"
-              :description="event.description" />
-            <event-pagination :meta="eventsMeta"></event-pagination>
+            <template v-if="eventsData.length">
+              <event-item v-for="event in eventsData"
+                :key="event.id"
+                :name="event.name"
+                :organiserName="event.organiser.name"
+                :favoritesCount="event.favorites_count"
+                :favorited="event.favorited"
+                :location="event.location"
+                :date="event.date"
+                :time="event.time"
+                :description="event.description" />
+              <event-pagination :meta="eventsMeta"></event-pagination>
+            </template>
+            <template v-else>
+              <p class="no-events has-text-centered has-text-weight-bold">No Events Found.</p>
+            </template>
           </div>
           <div class="column is-2">
             <event-filter-menu />
@@ -52,8 +57,18 @@ export default {
 
   mounted () {
     this.getEvents()
+  },
 
-    this.$eventBus.$on('pagination:switched', this.getEvents)
+  watch: {
+    '$route.query': {
+      handler (query) {
+        this.getEvents({
+          ...query,
+          page: 1
+        })
+      },
+      deep: true
+    }
   },
 
   computed: {
@@ -70,12 +85,17 @@ export default {
       getEventsData: 'event/getEvents'
     }),
 
-    getEvents (page = this.$route.query.page) {
-      this.getEventsData(page)
+    getEvents (filter = this.$route.query || {}, page = this.$route.query.page || 1) {
+      this.getEventsData({
+        filter,
+        page
+      })
     }
   }
 }
 </script>
 
 <style lang="sass">
+.no-events
+  margin-top: 40px
 </style>

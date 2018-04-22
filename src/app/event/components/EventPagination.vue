@@ -21,14 +21,14 @@ export default {
 
   methods: {
     switched (page = this.queryPage) {
-      if (page <= 0 || page > this.meta.last_page) return
+      if (page <= 0 || page > this.meta.last_page) {
+        return
+      }
 
       this.$eventBus.$emit('pagination:switched', page)
 
       this.$router.replace({
-        query: {
-          page
-        }
+        query: Object.assign({}, this.$route.query, { page })
       })
     }
   }

@@ -5,7 +5,7 @@
     </p>
     <ul class="menu-list">
       <li>
-        <a>
+        <a :class="{ 'is-active': selectedFilter.all }" @click.prevent="applyFilter('all', 1)">
           <b-icon
             pack="mdi"
             icon="chart-bubble"
@@ -16,7 +16,7 @@
         </a>
       </li>
       <li v-if="authenticated">
-        <a>
+        <a :class="{ 'is-active': selectedFilter.my }" @click.prevent="applyFilter('my', 1)">
           <b-icon
             pack="mdi"
             icon="calendar"
@@ -27,7 +27,7 @@
         </a>
       </li>
       <li v-if="authenticated">
-        <a>
+        <a :class="{ 'is-active': selectedFilter.favorited }" @click.prevent="applyFilter('favorited', 1)">
           <b-icon
             pack="mdi"
             icon="heart"
@@ -38,7 +38,7 @@
         </a>
       </li>
       <li>
-        <a>
+        <a :class="{ 'is-active': selectedFilter.popular }" @click.prevent="applyFilter('popular', 1)">
           <b-icon
             pack="mdi"
             icon="fire"
@@ -49,7 +49,9 @@
         </a>
       </li>
       <li>
-        <a>
+        <a :class="{ 'is-active': selectedFilter.today }"
+          @click.prevent="applyFilter('today', 1)"
+        >
           <b-icon
             pack="mdi"
             icon="calendar-check"
@@ -65,14 +67,34 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { isEmpty, omit } from 'lodash'
 
 export default {
   name: 'global-menu',
+
+  data () {
+    return {
+      selectedFilter: omit(this.$route.query, ['page'])
+    }
+  },
 
   computed: {
     ...mapGetters({
       authenticated: 'auth/authenticated'
     })
+  },
+
+  methods: {
+    applyFilter (key = null, value = null) {
+      this.selectedFilter = Object.assign({}, {}, { [key]: value })
+
+      this.$router.replace({
+        query: {
+          ...this.selectedFilter,
+          page: 1
+        }
+      })
+    }
   }
 }
 </script>
@@ -80,4 +102,7 @@ export default {
 <style lang="sass">
 .menu
   padding-bottom: 12px
+
+.menu-list > li > a.is-active > span > i
+  color: white
 </style>
