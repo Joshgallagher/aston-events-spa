@@ -18,6 +18,7 @@
               :date="event.date"
               :time="event.time"
               :description="event.description" />
+            <event-pagination :meta="eventsMeta"></event-pagination>
           </div>
           <div class="column is-2">
             <event-filter-menu />
@@ -36,6 +37,7 @@ import eventItem from '../components/EventItem'
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
+import eventPagination from '../components/EventPagination'
 
 export default {
   name: 'event-index',
@@ -44,16 +46,20 @@ export default {
     eventItem,
     eventNavigation,
     eventFilterMenu,
-    eventCategoryMenu
+    eventCategoryMenu,
+    eventPagination
   },
 
   mounted () {
     this.getEvents()
+
+    this.$eventBus.$on('pagination:switched', this.getEvents)
   },
 
   computed: {
     ...mapGetters({
       eventsData: 'event/eventsData',
+      eventsMeta: 'event/eventsMeta',
       confirmed: 'auth/confirmed',
       user: 'auth/user'
     })
@@ -61,13 +67,15 @@ export default {
 
   methods: {
     ...mapActions({
-      getEvents: 'event/getEvents'
-    })
+      getEventsData: 'event/getEvents'
+    }),
+
+    getEvents (page = this.$route.query.page) {
+      this.getEventsData(page)
+    }
   }
 }
 </script>
 
 <style lang="sass">
-.date-column
-  padding-top: 0
 </style>

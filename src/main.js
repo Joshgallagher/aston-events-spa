@@ -14,6 +14,8 @@ import './assets/sass/main.sass'
 Vue.use(Buefy)
 Vue.use(VueAxios, axios)
 
+Vue.prototype.$eventBus = new Vue()
+
 localforage.config({
   driver: localforage.LOCALSTORAGE
 })

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import * as mutationTypes from './mutationTypes'
 
-export const getEvents = ({ dispatch, commit }, page = 1) => {
+export const getEvents = ({ dispatch, commit }, page) => {
   return Vue.axios.get('http://aston-events-api.test/api/v1/events', {
     params: {
       page
