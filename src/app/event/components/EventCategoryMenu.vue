@@ -27,7 +27,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'global-menu',
+  name: 'event-category-menu',
 
   mounted () {
     this.getCategories()

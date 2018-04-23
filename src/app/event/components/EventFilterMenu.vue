@@ -4,7 +4,7 @@
       Choose a Filter
     </p>
     <ul class="menu-list">
-      <slot :authenticated="authenticated">
+      <slot>
         <li>
           <a :class="{ 'is-active': isAllEvents || selectedFilter.all }"
             @click.prevent="applyFilter('all', 1)"
@@ -80,7 +80,7 @@ import { mapGetters } from 'vuex'
 import { isEmpty, omit } from 'lodash'
 
 export default {
-  name: 'global-menu',
+  name: 'event-filter-menu',
 
   data () {
     return {
