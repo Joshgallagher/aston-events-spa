@@ -19,7 +19,7 @@
           </div>
           <div class="column is-2">
             <event-filter-menu>
-              <template scoped-slot="authenticated">
+              <template slot-scope="authenticated">
                 <li>
                   <router-link :to="{ name: 'event-index', query: { all: 1 } }">
                     <b-icon
