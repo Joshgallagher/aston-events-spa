@@ -7,6 +7,16 @@ const canNavigateMiddleware = (to, from, next) => {
         next({ name: 'event-index' })
       }
 
+      store.dispatch('auth/setToken')
+        .then(() => {
+          store.dispatch('auth/fetchUser')
+            .then(() => {
+              if (to.meta.confirmed && !store.getters['auth/confirmed']) {
+                next({ name: 'event-index' })
+              }
+            })
+        })
+
       next()
     })
     .catch(() => {
