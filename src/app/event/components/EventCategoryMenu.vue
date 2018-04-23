@@ -7,7 +7,7 @@
       <li v-for="category in categories"
         :key="category.id"
       >
-        <a>
+        <router-link :to="{ name: 'event-category', params: { category: category.slug } }">
           <b-icon
             pack="mdi"
             icon="tag"
@@ -15,7 +15,7 @@
             type="is-primary">
           </b-icon>
           {{ category.name }}
-        </a>
+        </router-link>
       </li>
     </ul>
   </aside>
