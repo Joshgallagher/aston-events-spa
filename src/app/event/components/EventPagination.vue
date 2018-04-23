@@ -17,7 +17,10 @@
 export default {
   name: 'event-pagination',
 
-  props: ['meta'],
+  props: [
+    'meta',
+    'for'
+  ],
 
   methods: {
     switched (page = this.queryPage) {
@@ -25,7 +28,7 @@ export default {
         return
       }
 
-      this.$eventBus.$emit('pagination:switched', page)
+      this.$eventBus.$emit(`pagination:switched:${this.for}`, page)
 
       this.$router.replace({
         query: Object.assign({}, this.$route.query, { page })

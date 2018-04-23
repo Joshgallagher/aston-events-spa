@@ -19,7 +19,7 @@
                 :date="event.date"
                 :time="event.time"
                 :description="event.description" />
-              <event-pagination :meta="eventsMeta"></event-pagination>
+              <event-pagination :meta="eventsMeta" for="event"></event-pagination>
             </template>
             <template v-else>
               <p class="no-events has-text-centered has-text-weight-bold">No Events Found.</p>

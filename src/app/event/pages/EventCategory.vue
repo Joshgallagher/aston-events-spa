@@ -18,7 +18,7 @@
               :date="event.date"
               :time="event.time"
               :description="event.description" />
-            <event-pagination :meta="eventsMeta"></event-pagination>
+            <event-pagination :meta="eventsMeta" for="category"></event-pagination>
           </div>
           <div class="column is-2">
             <event-filter-menu>
@@ -111,7 +111,7 @@ export default {
       category: this.$route.params.category
     })
 
-    this.$eventBus.$on('pagination:switched', this.updateCategoryEvents)
+    this.$eventBus.$on('pagination:switched:category', this.updateCategoryEvents)
   },
 
   watch: {
