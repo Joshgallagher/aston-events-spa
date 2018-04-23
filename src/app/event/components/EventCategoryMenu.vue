@@ -7,7 +7,9 @@
       <li v-for="category in categories"
         :key="category.id"
       >
-        <router-link :to="{ name: 'event-category', params: { category: category.slug } }">
+        <router-link :to="{ name: 'event-category', params: { category: category.slug } }"
+          :class="{ 'is-active': selectedCategory === category.slug }"
+        >
           <b-icon
             pack="mdi"
             icon="tag"
@@ -29,6 +31,22 @@ export default {
 
   mounted () {
     this.getCategories()
+
+    this.selectedCategory = this.$route.params.category
+  },
+
+  data () {
+    return {
+      selectedCategory: null
+    }
+  },
+
+  watch: {
+    '$route.params.category': {
+      handler (category) {
+        this.selectedCategory = category
+      }
+    }
   },
 
   computed: {
