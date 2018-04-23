@@ -7,7 +7,7 @@ export default [
     component: EventShow,
     meta: {
       guest: false,
-      authenticated: false
+      authenticated: true
     }
   }
 ]
