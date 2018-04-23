@@ -5,6 +5,9 @@
       <div class="container is-fluid">
         <div class="columns">
           <div class="column is-6 is-offset-2">
+            <b-notification type="is-warning" v-if="user" v-show="!confirmed">
+              Hey <strong>{{ user.name }}</strong>! You still need to confirm your email address before you can organise events on AstonEvents!
+            </b-notification>
             <event-item v-for="event in eventsData"
               :key="event.id"
               :name="event.name"
@@ -127,7 +130,9 @@ export default {
   computed: {
     ...mapGetters({
       eventsData: 'event/eventsData',
-      eventsMeta: 'event/eventsMeta'
+      eventsMeta: 'event/eventsMeta',
+      confirmed: 'auth/confirmed',
+      user: 'auth/user'
     })
   },
 
