@@ -4,7 +4,7 @@
       Choose a Filter
     </p>
     <ul class="menu-list">
-      <slot>
+      <slot :authenticated="authenticated">
         <li>
           <a :class="{ 'is-active': isAllEvents || selectedFilter.all }"
             @click.prevent="applyFilter('all', 1)"
