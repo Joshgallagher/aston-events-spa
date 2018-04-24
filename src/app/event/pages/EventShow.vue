@@ -19,7 +19,7 @@
                   <p class="has-text-grey has-text-weight-normal">Organised by {{ event.organiser.name }}</p>
                 </div>
                 <div class="column is-3 has-text-right">
-                  <a href="#" class="button is-primary is-outlined">{{ event.favorites_count }} Favorites</a>
+                  <event-favorite-button :event="event"></event-favorite-button>
                 </div>
               </div>
               <div class="columns">
@@ -152,6 +152,7 @@ import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
 import GlobalCarousel from '../../global/components/GlobalCarousel'
+import EventFavoriteButton from '../components/EventFavoriteButton'
 
 export default {
   name: 'event-show',
@@ -160,18 +161,24 @@ export default {
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    GlobalCarousel
+    GlobalCarousel,
+    EventFavoriteButton
   },
 
   beforeRouteEnter (to, from, next) {
-    console.log(to.params.event)
-    store.dispatch('event/getEvent', to.params.event)
-      .then(() => next())
+    store.dispatch('auth/setToken')
+      .then(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
   },
 
   beforeRouteUpdate (to, from, next) {
-    store.dispatch('event/getEvent', to.params.event)
-      .then(() => next())
+    store.dispatch('auth/setToken')
+      .then(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
   },
 
   computed: {

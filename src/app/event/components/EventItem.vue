@@ -15,7 +15,7 @@
           size="is-small"
           type="is-danger">
         </b-icon>
-        {{ favoriteCount }}
+        {{ favoritesCount }}
       </div>
     </div>
     <div class="columns">
@@ -57,7 +57,7 @@ export default {
     'organiserName': {
       type: String
     },
-    'favoriteCount': {
+    'favoritesCount': {
       type: Number,
       default: 0
     },
