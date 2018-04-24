@@ -168,11 +168,19 @@ export default {
         store.dispatch('event/getEvent', to.params.event)
           .then(() => next())
       })
+      .catch(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
   },
 
   beforeRouteUpdate (to, from, next) {
     store.dispatch('auth/setToken')
       .then(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
+      .catch(() => {
         store.dispatch('event/getEvent', to.params.event)
           .then(() => next())
       })
