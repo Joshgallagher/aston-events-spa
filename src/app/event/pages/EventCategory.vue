@@ -10,6 +10,7 @@
             </b-notification>
             <event-item v-for="event in eventsData"
               :key="event.id"
+              :slug="event.slug"
               :name="event.name"
               :organiserName="event.organiser.name"
               :favoritesCount="event.favorites_count"

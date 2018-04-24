@@ -5,7 +5,71 @@
       <div class="container is-fluid">
         <div class="columns">
           <div class="column is-6 is-offset-2">
-            <h1>Create</h1>
+            <div class="box">
+              <div class="columns">
+                <div class="column is-8">
+                  <h1 class="title is-4" v-text="event.name"></h1>
+                  <p class="has-text-grey has-text-weight-normal">Organised by {{ event.organiser.name }}</p>
+                </div>
+                <div class="column is-4 has-text-right">
+                  <a href="#" class="button is-primary is-outlined">{{ event.favorites_count }} Favorites</a>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <b-icon
+                    pack="mdi"
+                    icon="tag"
+                    size="is-small"
+                    type="is-primary">
+                  </b-icon>
+                  Posted in
+                  <router-link :to="{ name: 'event-category', params: { category: event.category.slug } }"
+                    v-text="event.category.name"
+                  >
+                  </router-link>
+                </div>
+              </div>
+              <div class="columns" v-if="event.related_event">
+                <div class="column">
+                  <b-icon
+                    pack="mdi"
+                    icon="link-variant"
+                    size="is-small"
+                    type="is-primary">
+                  </b-icon>
+                  Related to
+                  <router-link :to="{ name: 'event-show', params: { event: event.related_event.slug } }"
+                    v-text="event.related_event.name"
+                  >
+                  </router-link>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="date-column column">
+                  <b-icon
+                    pack="mdi"
+                    icon="map-marker-outline"
+                    size="is-small"
+                    type="is-primary">
+                  </b-icon>
+                  <span v-text="event.location"></span>
+                  &middot;
+                  <b-icon
+                    pack="mdi"
+                    icon="clock"
+                    size="is-small"
+                    type="is-primary">
+                  </b-icon>
+                  <span>{{ event.date }} @ {{ event.time }}</span>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <div class="content" v-text="event.description"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="column is-2">
             <event-filter-menu>
@@ -75,6 +139,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import store from '@/store'
 
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
@@ -89,8 +154,20 @@ export default {
     eventCategoryMenu
   },
 
+  beforeRouteEnter (to, from, next) {
+    console.log(to.params.event)
+    store.dispatch('event/getEvent', to.params.event)
+      .then(() => next())
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    store.dispatch('event/getEvent', to.params.event)
+      .then(() => next())
+  },
+
   computed: {
     ...mapGetters({
+      event: 'event/event',
       authenticated: 'auth/authenticated',
       confirmed: 'auth/confirmed',
       user: 'auth/user'
@@ -99,7 +176,7 @@ export default {
 
   methods: {
     ...mapActions({
-      getCategoryEvents: 'event/getCategoryEvents'
+      getEvent: 'event/getEvent'
     })
   }
 }

@@ -2,10 +2,11 @@
   <div class="box">
     <div class="columns">
       <div class="column is-10">
-        <a href="#" class="title is-5">
+        <router-link :to="{ name: 'event-show', params: { event: slug }}"
+          class="title is-5">
           <span class="is-7 has-text-primary has-text-weight-normal">{{ organiserName }} organised</span>
           {{ name }}
-        </a>
+        </router-link>
       </div>
       <div class="column is-2 has-text-right">
         <b-icon
@@ -47,6 +48,9 @@ export default {
   name: 'event-item',
 
   props: {
+    'slug': {
+      type: String
+    },
     'name': {
       type: String
     },

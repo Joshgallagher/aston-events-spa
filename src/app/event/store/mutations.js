@@ -1,6 +1,9 @@
 import * as mutationTypes from './mutationTypes'
 
 export default {
+  [mutationTypes.SET_EVENT] (state, event) {
+    state.event = event
+  },
   [mutationTypes.SET_EVENTS_DATA] (state, events) {
     state.events.data = events
   },

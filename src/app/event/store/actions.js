@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import * as mutationTypes from './mutationTypes'
 
+export const getEvent = ({ dispatch, commit }, event) => {
+  return Vue.axios.get(`http://aston-events-api.test/api/v1/events/${event}`)
+    .then((res) => {
+      commit(mutationTypes.SET_EVENT, res.data.data)
+    })
+}
+
 export const getEvents = ({ dispatch, commit }, { filter = {}, page = 1 }) => {
   return Vue.axios.get('http://aston-events-api.test/api/v1/events', {
     params: {
