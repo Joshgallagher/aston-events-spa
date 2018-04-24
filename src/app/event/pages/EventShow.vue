@@ -7,11 +7,7 @@
           <div class="column is-6 is-offset-2">
             <div class="box">
               <global-carousel v-if="event.media.length">
-                <img src="https://placeimg.com/640/480/any" alt="img">
-                <img src="https://placeimg.com/640/480/any?2" alt="img">
-                <img src="https://placeimg.com/640/480/any?3" alt="img">
-                <img src="https://placeimg.com/640/480/any?4" alt="img">
-                <img src="https://placeimg.com/640/480/any?5" alt="img">
+                <img v-for="media in event.media" :key="media.id" :src="media.media_url">
               </global-carousel>
               <div class="columns">
                 <div class="column is-9">
