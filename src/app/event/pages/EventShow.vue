@@ -6,12 +6,19 @@
         <div class="columns">
           <div class="column is-6 is-offset-2">
             <div class="box">
+              <global-carousel v-if="event.media.length">
+                <img src="https://placeimg.com/640/480/any" alt="img">
+                <img src="https://placeimg.com/640/480/any?2" alt="img">
+                <img src="https://placeimg.com/640/480/any?3" alt="img">
+                <img src="https://placeimg.com/640/480/any?4" alt="img">
+                <img src="https://placeimg.com/640/480/any?5" alt="img">
+              </global-carousel>
               <div class="columns">
-                <div class="column is-8">
+                <div class="column is-9">
                   <h1 class="title is-4" v-text="event.name"></h1>
                   <p class="has-text-grey has-text-weight-normal">Organised by {{ event.organiser.name }}</p>
                 </div>
-                <div class="column is-4 has-text-right">
+                <div class="column is-3 has-text-right">
                   <a href="#" class="button is-primary is-outlined">{{ event.favorites_count }} Favorites</a>
                 </div>
               </div>
@@ -144,6 +151,7 @@ import store from '@/store'
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
+import GlobalCarousel from '../../global/components/GlobalCarousel'
 
 export default {
   name: 'event-show',
@@ -151,7 +159,8 @@ export default {
   components: {
     eventNavigation,
     eventFilterMenu,
-    eventCategoryMenu
+    eventCategoryMenu,
+    GlobalCarousel
   },
 
   beforeRouteEnter (to, from, next) {
