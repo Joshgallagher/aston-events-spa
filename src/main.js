@@ -31,7 +31,7 @@ new Vue({
         store.dispatch('auth/fetchUser')
           .catch(() => {
             store.dispatch('auth/clearAuth')
-              .then(() => router.replace({ name: 'auth-login' }))
+              .then(() => router.replace({ name: 'event-index' }))
           })
       })
   },
