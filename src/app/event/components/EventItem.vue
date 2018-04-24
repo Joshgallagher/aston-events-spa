@@ -32,7 +32,7 @@
           icon="clock"
           size="is-small">
         </b-icon>
-        <span>{{ date }} @ {{ time }}</span>
+        <span>{{ momentDate }} @ {{ momentTime }}</span>
       </div>
     </div>
     <div class="columns">
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'event-item',
 
@@ -82,6 +84,18 @@ export default {
   computed: {
     isFavorited () {
       return this.favorited ? 'heart' : 'heart-outline'
+    },
+
+    dateTime () {
+      return `${this.date} ${this.time}`
+    },
+
+    momentDate () {
+      return moment(this.dateTime).format('dddd Do MMMM')
+    },
+
+    momentTime () {
+      return moment(this.dateTime).format('h:mm A')
     }
   }
 }

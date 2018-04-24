@@ -64,7 +64,7 @@
                     size="is-small"
                     type="is-primary">
                   </b-icon>
-                  <span>{{ event.date }} @ {{ event.time }}</span>
+                  <span>{{ momentDate }} @ {{ momentTime }}</span>
                 </div>
               </div>
               <div class="columns">
@@ -143,6 +143,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import store from '@/store'
+import moment from 'moment'
 
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
@@ -183,7 +184,19 @@ export default {
       authenticated: 'auth/authenticated',
       confirmed: 'auth/confirmed',
       user: 'auth/user'
-    })
+    }),
+
+    dateTime () {
+      return `${this.event.date} ${this.event.time}`
+    },
+
+    momentDate () {
+      return moment(this.dateTime).format('dddd Do MMMM')
+    },
+
+    momentTime () {
+      return moment(this.dateTime).format('h:mm A')
+    }
   },
 
   methods: {
