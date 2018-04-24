@@ -13,9 +13,9 @@
           pack="mdi"
           :icon="isFavorited"
           size="is-small"
-          type="is-danger">
+          type="is-primary">
         </b-icon>
-        {{ favoritesCount }}
+        <span v-text="favoritesCount"></span>
       </div>
     </div>
     <div class="columns">
@@ -23,21 +23,18 @@
         <b-icon
           pack="mdi"
           icon="map-marker-outline"
-          size="is-small">
+          size="is-small"
+          type="is-primary">
         </b-icon>
         <span v-text="location"></span>
         &middot;
         <b-icon
           pack="mdi"
           icon="clock"
-          size="is-small">
+          size="is-small"
+          type="is-primary">
         </b-icon>
         <span>{{ momentDate }} @ {{ momentTime }}</span>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column">
-        <div class="content" v-text="description"></div>
       </div>
     </div>
   </div>
