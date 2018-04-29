@@ -14,6 +14,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'event-favorite-button',
@@ -30,25 +31,30 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      authenticated: 'auth/authenticated'
+    }),
     classes () {
-      return ['button', 'is-primary', 'is-outlined', this.isFavorited ? 'is-active' : '']
+      return ['button', 'is-primary', 'is-outlined', this.isFavorited ? 'is-active' : '', !this.authenticated ? 'is-unauthenticated' : '']
     }
   },
 
   methods: {
     toggle () {
-      if (this.isFavorited) {
-        return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/${this.event.slug}/favorites`)
-          .then(() => {
-            this.isFavorited = false
-            this.favoritesCount--
-          })
-      } else {
-        return Vue.axios.post(`http://aston-events-api.test/api/v1/events/${this.event.slug}/favorites`)
-          .then(() => {
-            this.isFavorited = true
-            this.favoritesCount++
-          })
+      if (this.authenticated) {
+        if (this.isFavorited) {
+          return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/${this.event.slug}/favorites`)
+            .then(() => {
+              this.isFavorited = false
+              this.favoritesCount--
+            })
+        } else {
+          return Vue.axios.post(`http://aston-events-api.test/api/v1/events/${this.event.slug}/favorites`)
+            .then(() => {
+              this.isFavorited = true
+              this.favoritesCount++
+            })
+        }
       }
     }
   }
@@ -56,6 +62,15 @@ export default {
 </script>
 
 <style lang="sass">
+.is-unauthenticated
+  cursor: not-allowed
+  &:hover
+    border-color: #7957d5 !important
+    background: transparent !important
+    color: #7957d5 !important
+    i
+      color: #7957d5 !important
+
 .button
   &:hover i
     color: white
