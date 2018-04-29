@@ -7,7 +7,7 @@
       <slot>
         <li>
           <a :class="{ 'is-active': isAllEvents || selectedFilter.all }"
-            @click.prevent="applyFilter('all', 1)"
+            @click.prevent="applyFilter('all', 0)"
           >
             <b-icon
               pack="mdi"

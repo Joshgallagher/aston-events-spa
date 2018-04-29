@@ -25,7 +25,7 @@
             <event-create-button />
             <event-filter-menu>
               <li>
-                <router-link :to="{ name: 'event-index', query: { all: 1 } }">
+                <router-link :to="{ name: 'event-index', query: { all: 0 } }">
                   <b-icon
                     pack="mdi"
                     icon="chart-bubble"
