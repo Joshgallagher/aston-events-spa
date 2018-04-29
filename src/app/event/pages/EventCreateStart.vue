@@ -73,7 +73,6 @@
               </b-field>
 
               <b-field label="Description">
-                <div>ijijijij</div>
                 <b-input type="textarea" v-model="description"></b-input>
               </b-field>
 
