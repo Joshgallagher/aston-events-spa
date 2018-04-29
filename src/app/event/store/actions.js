@@ -8,6 +8,10 @@ export const getEvent = ({ dispatch, commit }, event) => {
     })
 }
 
+export const createEvent = ({ dispatch, commit }, payload) => {
+  return Vue.axios.post('http://aston-events-api.test/api/v1/events', payload)
+}
+
 export const getEvents = ({ dispatch, commit }, { filter = {}, page = 1 }) => {
   return Vue.axios.get('http://aston-events-api.test/api/v1/events', {
     params: {

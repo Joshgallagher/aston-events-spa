@@ -75,6 +75,7 @@
             </div>
           </div>
           <div class="column is-2">
+            <event-create-button />
             <event-filter-menu>
               <li>
                 <router-link :to="{ name: 'event-index', query: { all: 1 } }">
@@ -148,8 +149,9 @@ import moment from 'moment'
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
-import GlobalCarousel from '../../global/components/GlobalCarousel'
-import EventFavoriteButton from '../components/EventFavoriteButton'
+import globalCarousel from '../../global/components/GlobalCarousel'
+import eventFavoriteButton from '../components/EventFavoriteButton'
+import eventCreateButton from '../components/EventCreateButton'
 
 export default {
   name: 'event-show',
@@ -158,8 +160,9 @@ export default {
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    GlobalCarousel,
-    EventFavoriteButton
+    globalCarousel,
+    eventFavoriteButton,
+    eventCreateButton
   },
 
   beforeRouteEnter (to, from, next) {

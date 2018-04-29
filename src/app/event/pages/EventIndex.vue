@@ -27,6 +27,7 @@
             </template>
           </div>
           <div class="column is-2">
+            <event-create-button />
             <event-filter-menu />
             <event-category-menu />
           </div>
@@ -44,6 +45,7 @@ import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
 import eventPagination from '../components/EventPagination'
+import eventCreateButton from '../components/EventCreateButton'
 
 export default {
   name: 'event-index',
@@ -53,7 +55,8 @@ export default {
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    eventPagination
+    eventPagination,
+    eventCreateButton
   },
 
   mounted () {

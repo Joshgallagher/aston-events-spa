@@ -22,6 +22,7 @@
             <event-pagination :meta="eventsMeta" for="category"></event-pagination>
           </div>
           <div class="column is-2">
+            <event-create-button />
             <event-filter-menu>
               <li>
                 <router-link :to="{ name: 'event-index', query: { all: 1 } }">
@@ -95,6 +96,7 @@ import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
 import eventPagination from '../components/EventPagination'
+import eventCreateButton from '../components/EventCreateButton'
 
 export default {
   name: 'event-category',
@@ -104,7 +106,8 @@ export default {
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    eventPagination
+    eventPagination,
+    eventCreateButton
   },
 
   mounted () {
