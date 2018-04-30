@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="{ name: 'event-create-start' }" id="create-event-btn" class="button is-primary is-fullwidth" v-if="authenticated">
+  <router-link :to="{ name: 'event-create-start' }"
+    id="create-event-btn"
+    class="button is-primary is-fullwidth"
+    v-if="authenticated && confirmed"
+  >
     Create Event
   </router-link>
 </template>
@@ -12,7 +16,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      authenticated: 'auth/authenticated'
+      authenticated: 'auth/authenticated',
+      confirmed: 'auth/confirmed'
     })
   }
 }

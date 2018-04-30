@@ -62,6 +62,7 @@
                 :type="relatedEventHasErrors"
                 :message="errors.related_event_id">
                 <b-select placeholder="Select a related event" v-model="related_event_id">
+                  <option :value="null">No related event</option>
                   <option v-for="event in relatedEvents" :key="event.id" :value="event.id">
                     {{ event.name }} by {{ event.organiser.name }}
                   </option>
