@@ -91,7 +91,7 @@
           <div class="column is-2">
             <event-filter-menu>
               <li>
-                <router-link :to="{ name: 'event-index', query: { all: 0 } }">
+                <router-link :to="{ name: 'event-index', query: { paginated: 1 } }">
                   <b-icon
                     pack="mdi"
                     icon="chart-bubble"
@@ -247,7 +247,7 @@ export default {
         time: this.formattedTime,
         date: this.formattedDate
       }).then(() => {
-
+        this.$router.replace({ name: 'event-create-finish' })
       }).catch((err) => (this.errors = err.response.data.errors))
     }
   }

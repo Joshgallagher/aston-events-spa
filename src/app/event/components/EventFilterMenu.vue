@@ -6,8 +6,8 @@
     <ul class="menu-list">
       <slot>
         <li>
-          <a :class="{ 'is-active': isAllEvents || selectedFilter.all }"
-            @click.prevent="applyFilter('all', 0)"
+          <a :class="{ 'is-active': isAllEvents || selectedFilter.paginated }"
+            @click.prevent="applyFilter('paginated', 1)"
           >
             <b-icon
               pack="mdi"
