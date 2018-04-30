@@ -73,7 +73,7 @@
               </b-field>
 
               <b-field label="Description">
-                <b-input type="textarea" v-model="description"></b-input>
+                <event-wysiwyg v-model="description"></event-wysiwyg>
               </b-field>
 
               <b-field>
@@ -161,6 +161,7 @@ import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
 import eventPagination from '../components/EventPagination'
+import eventWysiwyg from '../components/EventWysiwyg'
 
 export default {
   name: 'event-create-start',
@@ -170,7 +171,8 @@ export default {
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    eventPagination
+    eventPagination,
+    eventWysiwyg
   },
 
   mounted () {
