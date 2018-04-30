@@ -101,9 +101,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      authenticated: 'auth/authenticated',
-      confirmed: 'auth/confirmed',
-      user: 'auth/user'
+      authenticated: 'auth/authenticated'
     })
   },
 
