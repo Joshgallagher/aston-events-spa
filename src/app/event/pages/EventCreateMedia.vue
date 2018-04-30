@@ -80,13 +80,14 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import localforage from 'localforage'
 
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
 
 export default {
-  name: 'event-create-finish',
+  name: 'event-create-media',
 
   components: {
     eventNavigation,
@@ -95,8 +96,7 @@ export default {
   },
 
   data () {
-    return {
-    }
+    return {}
   },
 
   computed: {

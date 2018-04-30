@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'event-create-start' }"
+  <router-link :to="{ name: 'event-create' }"
     id="create-event-btn"
     class="button is-primary is-fullwidth"
     v-if="authenticated && confirmed"

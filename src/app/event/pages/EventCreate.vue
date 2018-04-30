@@ -167,7 +167,7 @@ import eventCategoryMenu from '../components/EventCategoryMenu'
 import eventWysiwyg from '../components/EventWysiwyg'
 
 export default {
-  name: 'event-create-start',
+  name: 'event-create',
 
   components: {
     eventNavigation,
@@ -245,8 +245,8 @@ export default {
         description: this.description,
         time: this.formattedTime,
         date: this.formattedDate
-      }).then(() => {
-        this.$router.replace({ name: 'event-create-finish' })
+      }).then(res => {
+        this.$router.replace({ name: 'event-create-media', params: { event: res.data.data.slug } })
       }).catch((err) => (this.errors = err.response.data.errors))
     }
   }
