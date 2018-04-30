@@ -72,7 +72,9 @@
                 <b-input placeholder="Your event location..." v-model="location"></b-input>
               </b-field>
 
-              <b-field label="Description">
+              <b-field label="Description"
+                :type="descriptionHasErrors"
+                :message="errors.description">
                 <event-wysiwyg v-model="description"></event-wysiwyg>
               </b-field>
 
@@ -223,6 +225,9 @@ export default {
     },
     locationHasErrors () {
       if (this.errors.location) return 'is-danger'
+    },
+    descriptionHasErrors () {
+      if (this.errors.description) return 'is-danger'
     }
   },
 

@@ -69,7 +69,7 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <div class="content" v-text="event.description"></div>
+                  <div class="content" v-html="event.description"></div>
                 </div>
               </div>
             </div>
