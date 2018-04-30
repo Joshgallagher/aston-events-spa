@@ -7,7 +7,9 @@
           <div class="column is-6 is-offset-2">
             <div class="box">
               <h2 class="is-size-4 has-text-weight-semibold">Create Event: Step 1</h2>
-              <p class="create-info-p is-size-6">Here you can add all the general information about your event. <span class="has-text-weight-semibold">Don't worry, you will have a chance to upload pictures next!</span></p>
+              <p class="create-info-p is-size-6">
+                Here you can add all the general information about your event. <span class="has-text-weight-semibold">Don't worry, you will have a chance to upload pictures next!</span>
+              </p>
               <b-field label="Name"
                 :type="nameHasErrors"
                 :message="errors.name">
@@ -158,22 +160,18 @@
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 
-import eventItem from '../components/EventItem'
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
-import eventPagination from '../components/EventPagination'
 import eventWysiwyg from '../components/EventWysiwyg'
 
 export default {
   name: 'event-create-start',
 
   components: {
-    eventItem,
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    eventPagination,
     eventWysiwyg
   },
 
