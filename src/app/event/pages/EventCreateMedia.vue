@@ -10,6 +10,23 @@
               <p class="create-info-p is-size-6">
                 Now you can add as many images as you desire!
               </p>
+              <vue-dropzone ref="myVueDropzone"
+                id="dropzone"
+                :destroyDropzone="false"
+                :options="dropzoneOptions"
+                @vdropzone-success="dropSuccess"
+                @vdropzone-removed-file="dropRemoveFile"
+              >
+              </vue-dropzone>
+              <b-field>
+                  <p class="control">
+                      <router-link :to="{ name: 'event-show', params: { event } }"
+                        class="button is-primary"
+                        @click.prevent="create">
+                        Finish
+                      </router-link>
+                  </p>
+              </b-field>
             </div>
           </div>
           <div class="column is-2">
@@ -79,8 +96,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import localforage from 'localforage'
+import Vue from 'vue'
+import { mapGetters } from 'vuex'
+
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.css'
 
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
@@ -92,11 +112,23 @@ export default {
   components: {
     eventNavigation,
     eventFilterMenu,
-    eventCategoryMenu
+    eventCategoryMenu,
+    vueDropzone: vue2Dropzone
   },
 
   data () {
-    return {}
+    return {
+      event: this.$route.params.event,
+      dropzoneOptions: {
+        url: `http://aston-events-api.test/api/v1/events/${this.$route.params.event}/media`,
+        thumbnailWidth: 150,
+        maxFilesize: 0.5,
+        paramName: 'image',
+        addRemoveLinks: true,
+        acceptedFiles: 'image/png,image/jpeg,image/bmp',
+        headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${this.$store.getters['auth/accessToken']}` }
+      }
+    }
   },
 
   computed: {
@@ -106,7 +138,17 @@ export default {
   },
 
   methods: {
-    ...mapActions({})
+    dropSuccess (file, res) {
+      file.id = res.data.id
+    },
+    dropRemoveFile (file, err, xhr) {
+      return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/media/${file.id}`)
+    }
   }
 }
 </script>
+
+<style lang="sass">
+#dropzone
+  margin: 20px 0
+</style>

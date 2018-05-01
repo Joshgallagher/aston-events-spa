@@ -5,10 +5,12 @@ import { isEmpty } from 'lodash'
 export default {
   [mutationTypes.SET_TOKEN] (state, token) {
     if (isEmpty(token)) {
+      state.user.accessToken = null
       localforage.removeItem('access_token', token)
       return
     }
 
+    state.user.accessToken = token
     localforage.setItem('access_token', token)
   },
 

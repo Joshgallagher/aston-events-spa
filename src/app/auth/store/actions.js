@@ -62,13 +62,14 @@ export const setToken = ({ dispatch, commit }, token) => {
   setHttpToken(token)
 }
 
-export const checkTokenExists = ({ dispatch }) => {
+export const checkTokenExists = ({ commit, dispatch }) => {
   return localforage.getItem('access_token')
     .then(token => {
       if (isEmpty(token)) {
         return Promise.reject(new Error('TOKEN_DOES_NOT_EXIST'))
       }
 
+      commit(mutationTypes.SET_TOKEN, token)
       return Promise.resolve(token)
     })
 }

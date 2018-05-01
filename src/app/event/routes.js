@@ -7,7 +7,7 @@ import eventCreateMedia from './routes/eventCreateMedia'
 export default [
   ...eventIndex,
   ...eventCategory,
-  ...eventShow,
   ...eventCreate,
-  ...eventCreateMedia
+  ...eventCreateMedia,
+  ...eventShow
 ]
