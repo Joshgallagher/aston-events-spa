@@ -11,15 +11,7 @@
             <template v-if="eventsData.length">
               <event-item v-for="event in eventsData"
                 :key="event.id"
-                :slug="event.slug"
-                :name="event.name"
-                :organiserName="event.organiser.name"
-                :favoritesCount="event.favorites_count"
-                :favorited="event.favorited"
-                :location="event.location"
-                :date="event.date"
-                :time="event.time"
-                :description="event.description" />
+                :event="event" />
               <event-pagination :meta="eventsMeta" for="event"></event-pagination>
             </template>
             <template v-else>

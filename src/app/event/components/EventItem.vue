@@ -2,10 +2,10 @@
   <div class="box">
     <div class="columns">
       <div class="column is-10">
-        <router-link :to="{ name: 'event-show', params: { event: slug }}"
+        <router-link :to="{ name: 'event-show', params: { event: event.slug }}"
           class="title is-5">
-          <span class="is-7 has-text-primary has-text-weight-normal">{{ organiserName }} organised</span>
-          {{ name }}
+          <span class="is-7 has-text-primary has-text-weight-normal">{{ event.organiser.name }} organised</span>
+          {{ event.name }}
         </router-link>
       </div>
       <div class="column is-2 has-text-right">
@@ -15,7 +15,22 @@
           size="is-small"
           type="is-primary">
         </b-icon>
-        <span v-text="favoritesCount"></span>
+        <span v-text="event.favorites_count"></span>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <b-icon
+          pack="mdi"
+          icon="tag"
+          size="is-small"
+          type="is-primary">
+        </b-icon>
+        Posted in
+        <router-link :to="{ name: 'event-category', params: { category: event.category.slug } }"
+          v-text="event.category.name"
+        >
+        </router-link>
       </div>
     </div>
     <div class="columns">
@@ -26,7 +41,7 @@
           size="is-small"
           type="is-primary">
         </b-icon>
-        <span v-text="location"></span>
+        <span v-text="event.location"></span>
         &middot;
         <b-icon
           pack="mdi"
@@ -37,54 +52,39 @@
         <span>{{ momentDate }} @ {{ momentTime }}</span>
       </div>
     </div>
+    <div class="columns" v-if="authenticated && confirmed && owns">
+      <div class="column">
+        <button class="button is-primary">Edit</button>
+        <button class="button is-danger" @click.prevent="destroyEvent">Delete</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 
 export default {
   name: 'event-item',
 
-  props: {
-    'slug': {
-      type: String
-    },
-    'name': {
-      type: String
-    },
-    'organiserName': {
-      type: String
-    },
-    'favoritesCount': {
-      type: Number,
-      default: 0
-    },
-    'favorited': {
-      type: Boolean,
-      default: false
-    },
-    'location': {
-      type: String
-    },
-    'date': {
-      type: String
-    },
-    'time': {
-      type: String
-    },
-    'description': {
-      type: String
-    }
-  },
+  props: ['event'],
 
   computed: {
+    ...mapGetters({
+      authenticated: 'auth/authenticated',
+      confirmed: 'auth/confirmed',
+      user: 'auth/user'
+    }),
+    owns () {
+      return this.user.id === this.event.organiser.id
+    },
     isFavorited () {
-      return this.favorited ? 'heart' : 'heart-outline'
+      return this.event.favorited ? 'heart' : 'heart-outline'
     },
 
     dateTime () {
-      return `${this.date} ${this.time}`
+      return `${this.event.date} ${this.event.time}`
     },
 
     momentDate () {
@@ -93,6 +93,17 @@ export default {
 
     momentTime () {
       return moment(this.dateTime).format('h:mm A')
+    }
+  },
+
+  methods: {
+    ...mapActions({
+      deleteEvent: 'event/deleteEvent'
+    }),
+    destroyEvent () {
+      if (confirm(`Are you sure you want to delete ${this.event.name}`)) {
+        this.deleteEvent(this.event.slug)
+      }
     }
   }
 }

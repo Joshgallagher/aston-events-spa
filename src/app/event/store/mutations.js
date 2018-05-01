@@ -12,5 +12,8 @@ export default {
   },
   [mutationTypes.SET_EVENTS_META] (state, meta) {
     state.events.meta = meta
+  },
+  [mutationTypes.DELETE_EVENT] (state, slug) {
+    state.events.data = state.events.data.filter(event => event.slug !== slug)
   }
 }
