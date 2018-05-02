@@ -72,15 +72,6 @@ export default {
 </script>
 
 <style lang="sass">
-.is-unauthenticated
-  cursor: not-allowed
-  &:hover
-    border-color: #7957d5 !important
-    background: transparent !important
-    color: #7957d5 !important
-    i
-      color: #7957d5 !important
-
 .button
   &:hover i
     color: white
