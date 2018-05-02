@@ -12,7 +12,7 @@
               <div class="columns">
                 <div class="column is-9">
                   <h1 class="title is-4" v-text="event.name"></h1>
-                  <p class="has-text-grey has-text-weight-normal">Organised by {{ event.organiser.name }}</p>
+                  <p class="has-text-grey has-text-weight-normal">Organised by <a :href="mailTo">{{ event.organiser.name }}</a></p>
                 </div>
                 <div class="column is-3 has-text-right">
                   <event-favorite-button :event="event"></event-favorite-button>
@@ -207,6 +207,10 @@ export default {
 
     momentTime () {
       return moment(this.dateTime).format('h:mm A')
+    },
+
+    mailTo () {
+      return `mailto:${this.event.organiser.email}`
     }
   },
 
