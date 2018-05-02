@@ -8,11 +8,13 @@ import Buefy from 'buefy'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import localforage from 'localforage'
+import InstantSearch from 'vue-instantsearch'
 
 import './assets/sass/main.sass'
 
 Vue.use(Buefy)
 Vue.use(VueAxios, axios)
+Vue.use(InstantSearch)
 
 Vue.prototype.$eventBus = new Vue()
 
