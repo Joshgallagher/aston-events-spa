@@ -6,22 +6,22 @@
         <div class="columns">
           <div class="column is-6 is-offset-2">
             <div class="box">
-              <h2 class="is-size-4 has-text-weight-semibold">Create Event: Step 1</h2>
-              <p class="create-info-p is-size-6">
-                Here you can add all the general information about your event. <span class="has-text-weight-semibold">Don't worry, you will have a chance to upload pictures next!</span>
-              </p>
+              <h2 class="is-size-4 has-text-weight-semibold">Update Event</h2>
+
+              <vue-dropzone ref="myVueDropzone"
+                id="dropzone"
+                :destroyDropzone="false"
+                :options="dropzoneOptions"
+                @vdropzone-success="dropSuccess"
+                @vdropzone-removed-file="dropRemoveFile"
+                @vdropzone-mounted="dropPopulateDropzone"
+              >
+              </vue-dropzone>
+
               <b-field label="Name"
                 :type="nameHasErrors"
                 :message="errors.name">
                 <b-input placeholder="Your event name..." v-model="name"></b-input>
-              </b-field>
-
-              <b-field label="Category"
-                :type="categoryHasErrors"
-                :message="errors.category_id">
-                <b-select placeholder="Select a category" v-model="category_id">
-                  <option v-for="category in categories" :key="category.id" :value="category.id" v-text="category.name"></option>
-                </b-select>
               </b-field>
 
               <b-field grouped>
@@ -83,8 +83,8 @@
 
               <b-field>
                 <p class="control">
-                  <button class="button is-primary" @click.prevent="create">
-                    Next step
+                  <button class="button is-primary" @click.prevent="update">
+                    Update
                   </button>
                 </p>
               </b-field>
@@ -158,8 +158,14 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapActions, mapGetters } from 'vuex'
+import store from '@/store'
 import moment from 'moment'
+import { isEmpty } from 'lodash'
+
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.css'
 
 import eventNavigation from '../components/EventNavigation'
 import eventFilterMenu from '../components/EventFilterMenu'
@@ -167,13 +173,38 @@ import eventCategoryMenu from '../components/EventCategoryMenu'
 import eventWysiwyg from '../components/EventWysiwyg'
 
 export default {
-  name: 'event-create',
+  name: 'event-update',
 
   components: {
     eventNavigation,
     eventFilterMenu,
     eventCategoryMenu,
-    eventWysiwyg
+    eventWysiwyg,
+    vueDropzone: vue2Dropzone
+  },
+
+  beforeRouteEnter (to, from, next) {
+    store.dispatch('auth/setToken')
+      .then(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
+      .catch(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    store.dispatch('auth/setToken')
+      .then(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
+      .catch(() => {
+        store.dispatch('event/getEvent', to.params.event)
+          .then(() => next())
+      })
   },
 
   mounted () {
@@ -181,21 +212,34 @@ export default {
   },
 
   data () {
+    let hasRelatedEvent = this.$store.getters['event/event'].related_event
+      ? this.$store.getters['event/event'].related_event.id
+      : null
+
     return {
-      name: null,
-      category_id: null,
-      related_event_id: null,
-      location: null,
-      description: null,
-      date: new Date(),
-      time: new Date(),
-      errors: []
+      name: this.$store.getters['event/event'].name || '',
+      related_event_id: hasRelatedEvent,
+      location: this.$store.getters['event/event'].location || '',
+      description: this.$store.getters['event/event'].description || '',
+      date: new Date(this.$store.getters['event/event'].date) || new Date(),
+      time: new Date(`${this.$store.getters['event/event'].date} ${this.$store.getters['event/event'].time}`) || new Date(),
+      errors: [],
+      event: this.$route.params.event,
+      dropzoneOptions: {
+        url: `http://aston-events-api.test/api/v1/events/${this.$route.params.event}/media`,
+        thumbnailWidth: 150,
+        maxFilesize: 0.5,
+        paramName: 'image',
+        addRemoveLinks: true,
+        acceptedFiles: 'image/png,image/jpeg,image/bmp',
+        headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${this.$store.getters['auth/accessToken']}` }
+      }
     }
   },
 
   computed: {
     ...mapGetters({
-      categories: 'categories',
+      eventData: 'event/event',
       relatedEvents: 'events',
       authenticated: 'auth/authenticated',
       confirmed: 'auth/confirmed',
@@ -209,9 +253,6 @@ export default {
     },
     nameHasErrors () {
       if (this.errors.name) return 'is-danger'
-    },
-    categoryHasErrors () {
-      if (this.errors.category_id) return 'is-danger'
     },
     dateHasErrors () {
       if (this.errors.date) return 'is-danger'
@@ -232,28 +273,48 @@ export default {
 
   methods: {
     ...mapActions({
-      createEvent: 'event/createEvent',
-      getCategories: 'getCategories',
-      getEventsWithoutPagination: 'getEvents'
+      getEventsWithoutPagination: 'getEvents',
+      updateEvent: 'event/updateEvent'
     }),
-    create () {
-      this.createEvent({
-        name: this.name,
-        category_id: this.category_id,
-        related_event_id: this.related_event_id,
-        location: this.location,
-        description: this.description,
-        time: this.formattedTime,
-        date: this.formattedDate
+    update () {
+      this.updateEvent({
+        slug: this.event.slug,
+        payload: {
+          name: this.name,
+          related_event_id: this.related_event_id,
+          location: this.location,
+          description: this.description,
+          time: this.formattedTime,
+          date: this.formattedDate
+        }
       }).then(res => {
         this.$router.replace({ name: 'event-create-media', params: { event: res.data.data.slug } })
       }).catch((err) => (this.errors = err.response.data.errors))
+    },
+    dropSuccess (file, res) {
+      file.id = res.data.id
+    },
+    dropRemoveFile (file, err, xhr) {
+      return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/media/${file.id}`)
+    },
+    dropPopulateDropzone () {
+      let files = this.eventData.media
+
+      if (!isEmpty(files)) {
+        files.forEach(file => {
+          this.$refs.myVueDropzone.manuallyAddFile({
+            id: file.id,
+            size: file.size,
+            type: file.mime_type
+          }, file.media_url)
+        })
+      }
     }
   }
 }
 </script>
 
-<style lang="sass">
-.create-info-p
+<style lang="sass" scoped>
+#dropzone
   margin: 20px 0
 </style>

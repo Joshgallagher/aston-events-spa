@@ -12,6 +12,10 @@ export const createEvent = ({ dispatch, commit }, payload) => {
   return Vue.axios.post('http://aston-events-api.test/api/v1/events', payload)
 }
 
+export const updateEvent = ({ dispatch, commit }, { slug, payload }) => {
+  return Vue.axios.patch(`http://aston-events-api.test/api/v1/events/${slug}`, payload)
+}
+
 export const deleteEvent = ({ dispatch, commit }, slug) => {
   return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/${slug}`)
     .then(() => {
