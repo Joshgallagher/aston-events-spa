@@ -8,6 +8,7 @@
             <b-notification type="is-warning" v-if="user" v-show="!confirmed">
               Hey <strong>{{ user.name }}</strong>! You still need to confirm your email address before you can organise events on AstonEvents!
             </b-notification>
+            <event-search-box></event-search-box>
             <event-item v-for="event in eventsData"
               :key="event.id"
               :event="event" />
@@ -89,6 +90,7 @@ import eventFilterMenu from '../components/EventFilterMenu'
 import eventCategoryMenu from '../components/EventCategoryMenu'
 import eventPagination from '../components/EventPagination'
 import eventCreateButton from '../components/EventCreateButton'
+import eventSearchBox from '../components/EventSearchBox'
 
 export default {
   name: 'event-category',
@@ -99,7 +101,8 @@ export default {
     eventFilterMenu,
     eventCategoryMenu,
     eventPagination,
-    eventCreateButton
+    eventCreateButton,
+    eventSearchBox
   },
 
   mounted () {
