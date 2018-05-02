@@ -8,7 +8,7 @@
             <div class="box">
               <h2 class="is-size-4 has-text-weight-semibold">Create Event: Step 2</h2>
               <p class="create-info-p is-size-6">
-                Now you can add as many images as you desire!
+                Here you can add any number of images to your Event. <strong>You are not required to add images</strong>.
               </p>
               <vue-dropzone ref="myVueDropzone"
                 id="dropzone"
@@ -23,7 +23,7 @@
                       <router-link :to="{ name: 'event-show', params: { event } }"
                         class="button is-primary"
                         @click.prevent="create">
-                        Finish
+                        Create
                       </router-link>
                   </p>
               </b-field>

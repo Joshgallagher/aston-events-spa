@@ -81,13 +81,14 @@
                 <event-wysiwyg v-model="description"></event-wysiwyg>
               </b-field>
 
-              <b-field>
-                <p class="control">
-                  <button class="button is-primary" @click.prevent="create">
-                    Next step
-                  </button>
-                </p>
-              </b-field>
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-link" @click.prevent="create">Next step</button>
+                </div>
+                <div class="control">
+                  <router-link class="button is-text" :to="{ name: 'event-index' }">Cancel</router-link>
+                </div>
+              </div>
 
             </div>
           </div>

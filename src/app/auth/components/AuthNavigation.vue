@@ -11,7 +11,7 @@
         </div>
         <div class="navbar-end-container navbar-end is-flex">
           <div class="navbar-item">
-            <router-link :to="{ name: 'event-index' }" class="button is-link is-inverted is-outlined">Explore</router-link>
+            <router-link :to="{ name: 'event-index' }" class="button is-link is-inverted is-outlined">Events</router-link>
           </div>
           <div class="navbar-item" v-if="showLoginBtn">
             <router-link :to="{ name: 'auth-login' }"

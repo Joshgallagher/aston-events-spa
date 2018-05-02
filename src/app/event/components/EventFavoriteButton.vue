@@ -1,6 +1,7 @@
 <template>
   <a :class="classes"
     @click.prevent="toggle"
+    v-if="authenticated"
   >
     <b-icon
       pack="mdi"
@@ -10,6 +11,15 @@
     </b-icon>
     <span v-text="favoritesCount"></span>
   </a>
+  <span v-else>
+    <b-icon
+      pack="mdi"
+      icon="heart-outline"
+      size="is-small"
+      type="is-primary">
+    </b-icon>
+    <span v-text="favoritesCount"></span>
+  </span>
 </template>
 
 <script>
@@ -35,7 +45,7 @@ export default {
       authenticated: 'auth/authenticated'
     }),
     classes () {
-      return ['button', 'is-primary', 'is-outlined', this.isFavorited ? 'is-active' : '', !this.authenticated ? 'is-unauthenticated' : '']
+      return ['button', 'is-primary', 'is-outlined', this.isFavorited ? 'is-active' : '']
     }
   },
 

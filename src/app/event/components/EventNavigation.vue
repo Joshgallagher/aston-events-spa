@@ -10,6 +10,27 @@
         </div>
       </div>
       <div class="navbar-end-container navbar-end is-flex">
+        <template v-if="!authenticated">
+          <div class="navbar-item">
+            <router-link :to="{ name: 'event-index' }"
+              class="button is-link is-inverted is-outlined"
+            >
+              Events
+            </router-link>
+          </div>
+          <div class="navbar-item">
+            <router-link :to="{ name: 'auth-login' }"
+              class="button is-link"
+              >Log in
+            </router-link>
+          </div>
+          <div class="navbar-item">
+            <router-link :to="{ name: 'auth-signup' }"
+              class="button is-link"
+              >Sign up
+            </router-link>
+          </div>
+        </template>
         <a class="navbar-item"
           v-if="authenticated"
           @click.prevent="signout">
@@ -45,4 +66,10 @@ export default {
 </script>
 
 <style lang="sass">
+.navbar-container
+  flex-direction: row
+  justify-content: space-between
+
+.navbar-end-container
+  align-items: center
 </style>
