@@ -54,7 +54,11 @@
     </div>
     <div class="columns" v-if="authenticated && confirmed && owns">
       <div class="column">
-        <button class="button is-primary">Edit</button>
+        <router-link class="button is-primary"
+          :to="{ name: 'event-update', params: { event: event.slug } }"
+        >
+        Edit
+      </router-link>
         <button class="button is-danger" @click.prevent="destroyEvent">Delete</button>
       </div>
     </div>

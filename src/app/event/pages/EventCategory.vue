@@ -27,7 +27,7 @@
                   All Events
                 </router-link>
               </li>
-              <li v-if="authenticated">
+              <li v-if="authenticated && confirmed">
                 <router-link :to="{ name: 'event-index', query: { my: 1 } }">
                   <b-icon
                     pack="mdi"

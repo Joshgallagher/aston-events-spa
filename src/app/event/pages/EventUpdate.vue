@@ -278,7 +278,7 @@ export default {
     }),
     update () {
       this.updateEvent({
-        slug: this.event.slug,
+        slug: this.eventData.slug,
         payload: {
           name: this.name,
           related_event_id: this.related_event_id,
@@ -288,7 +288,7 @@ export default {
           date: this.formattedDate
         }
       }).then(res => {
-        this.$router.replace({ name: 'event-create-media', params: { event: res.data.data.slug } })
+        this.$router.replace({ name: 'event-show', params: { event: this.eventData.slug } })
       }).catch((err) => (this.errors = err.response.data.errors))
     },
     dropSuccess (file, res) {

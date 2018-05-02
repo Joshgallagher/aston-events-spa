@@ -18,7 +18,7 @@
             All Events
           </a>
         </li>
-        <li v-if="authenticated">
+        <li v-if="authenticated && confirmed">
           <a :class="{ 'is-active': selectedFilter.my }"
             @click.prevent="applyFilter('my', 1)"
           >
@@ -90,7 +90,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      authenticated: 'auth/authenticated'
+      authenticated: 'auth/authenticated',
+      confirmed: 'auth/confirmed'
     }),
 
     isAllEvents () {

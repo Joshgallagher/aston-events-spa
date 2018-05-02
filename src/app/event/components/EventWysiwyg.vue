@@ -1,7 +1,7 @@
 <template>
   <div>
     <input id="trix" type="hidden" :value="value">
-    <trix-editor ref="trix" input="trix" @input="updateWysiwyg()"></trix-editor>
+    <trix-editor ref="trix" input="trix"></trix-editor>
   </div>
 </template>
 
@@ -19,10 +19,10 @@ export default {
     }
   },
 
-  methods: {
-    updateWysiwyg () {
-      this.$emit('input', this.$refs.trix.value)
-    }
+  mounted () {
+    this.$refs.trix.addEventListener('trix-change', event => {
+      this.$emit('input', event.target.innerHTML)
+    })
   }
 }
 </script>
