@@ -227,7 +227,7 @@ export default {
       errors: [],
       event: this.$route.params.event,
       dropzoneOptions: {
-        url: `http://aston-events-api.test/api/v1/events/${this.$route.params.event}/media`,
+        url: `${process.env.API_URL}/events/${this.$route.params.event}/media`,
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         paramName: 'image',
@@ -250,7 +250,7 @@ export default {
       return moment(this.date).format('YYYY-MM-DD')
     },
     formattedTime () {
-      return moment(this.date).format('hh:mm:ss')
+      return moment(this.time).format('HH:mm:ss')
     },
     nameHasErrors () {
       if (this.errors.name) return 'is-danger'
@@ -296,7 +296,7 @@ export default {
       file.id = res.data.id
     },
     dropRemoveFile (file, err, xhr) {
-      return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/media/${file.id}`)
+      return Vue.axios.delete(`${process.env.API_URL}/events/media/${file.id}`)
     },
     dropPopulateDropzone () {
       let files = this.eventData.media

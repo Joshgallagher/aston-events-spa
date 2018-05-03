@@ -7,7 +7,7 @@
           <div class="column is-6 is-offset-2">
             <div class="box">
               <global-carousel v-if="event.media.length">
-                <img v-for="media in event.media" :key="media.id" :src="media.media_url">
+                <img v-for="media in event.media" :key="media.id" :data-flickity-lazyload="media.media_url">
               </global-carousel>
               <div class="columns">
                 <div class="column is-9">

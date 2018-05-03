@@ -120,7 +120,7 @@ export default {
     return {
       event: this.$route.params.event,
       dropzoneOptions: {
-        url: `http://aston-events-api.test/api/v1/events/${this.$route.params.event}/media`,
+        url: `${process.env.API_URL}/events/${this.$route.params.event}/media`,
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         paramName: 'image',
@@ -142,7 +142,7 @@ export default {
       file.id = res.data.id
     },
     dropRemoveFile (file, err, xhr) {
-      return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/media/${file.id}`)
+      return Vue.axios.delete(`${process.env.API_URL}/events/media/${file.id}`)
     }
   }
 }

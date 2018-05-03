@@ -6,7 +6,7 @@ import localforage from 'localforage'
 import * as mutationTypes from './mutationTypes'
 
 export const signup = ({ dispatch }, { payload, context }) => {
-  return Vue.axios.post('http://aston-events-api.test/api/v1/register', payload)
+  return Vue.axios.post(`${process.env.API_URL}/register`, payload)
     .then((res) => {
       let token = res.data.meta.access_token
 
@@ -23,7 +23,7 @@ export const signup = ({ dispatch }, { payload, context }) => {
 }
 
 export const login = ({ dispatch }, { payload, context }) => {
-  return Vue.axios.post('http://aston-events-api.test/api/v1/auth/token', payload)
+  return Vue.axios.post(`${process.env.API_URL}/auth/token`, payload)
     .then((res) => {
       let token = res.data.meta.access_token
 
@@ -40,11 +40,11 @@ export const login = ({ dispatch }, { payload, context }) => {
 }
 
 export const confirmEmail = ({ dispatch }, token) => {
-  return Vue.axios.post('http://aston-events-api.test/api/v1/register/confirm', token)
+  return Vue.axios.post(`${process.env.API_URL}/register/confirm`, token)
 }
 
 export const fetchUser = ({ commit }) => {
-  return Vue.axios.get('http://aston-events-api.test/api/v1/user')
+  return Vue.axios.get(`${process.env.API_URL}/user`)
     .then(res => {
       commit(mutationTypes.SET_AUTHENTICATED, true)
       commit(mutationTypes.SET_CONFIRMED, res.data.data.confirmed)
@@ -83,6 +83,6 @@ export const clearAuth = ({ commit, dispatch }) => {
 }
 
 export const logout = ({ dispatch }) => {
-  return Vue.axios.post('http://aston-events-api.test/api/v1/auth/token/revoke')
+  return Vue.axios.post(`${process.env.API_URL}/auth/token/revoke`)
     .then(() => dispatch('clearAuth'))
 }

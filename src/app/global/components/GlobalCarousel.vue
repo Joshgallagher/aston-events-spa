@@ -20,8 +20,8 @@ export default {
         wrapAround: true,
         pageDots: false,
         autoPlay: true,
-        imagesLoaded: true,
-        setGallerySize: false
+        setGallerySize: false,
+        lazyLoad: true
       }
     }
   },

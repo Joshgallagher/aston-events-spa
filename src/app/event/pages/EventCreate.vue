@@ -206,7 +206,7 @@ export default {
       return moment(this.date).format('YYYY-MM-DD')
     },
     formattedTime () {
-      return moment(this.date).format('hh:mm:ss')
+      return moment(this.time).format('HH:mm:ss')
     },
     nameHasErrors () {
       if (this.errors.name) return 'is-danger'

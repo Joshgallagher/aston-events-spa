@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  created () {
+  mounted () {
     store.dispatch('auth/setToken')
       .then(() => {
         store.dispatch('auth/fetchUser')

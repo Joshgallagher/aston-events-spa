@@ -53,13 +53,13 @@ export default {
     toggle () {
       if (this.authenticated) {
         if (this.isFavorited) {
-          return Vue.axios.delete(`http://aston-events-api.test/api/v1/events/${this.event.slug}/favorites`)
+          return Vue.axios.delete(`${process.env.API_URL}/events/${this.event.slug}/favorites`)
             .then(() => {
               this.isFavorited = false
               this.favoritesCount--
             })
         } else {
-          return Vue.axios.post(`http://aston-events-api.test/api/v1/events/${this.event.slug}/favorites`)
+          return Vue.axios.post(`${process.env.API_URL}/events/${this.event.slug}/favorites`)
             .then(() => {
               this.isFavorited = true
               this.favoritesCount++
